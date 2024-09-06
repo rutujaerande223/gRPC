@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package user;
+
+service UserService {
+  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+  rpc GetUser (GetUserRequest) returns (GetUserResponse);
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+  rpc GetAllUsers (GetAllUsersRequest) returns (GetAllUsersResponse); // Ensure semicolon is here
+}
+
+// Create User Request and Response
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+}
+
+message CreateUserResponse {
+  string message = 1;
+  bool success = 2;
+}
+
+// Get User Request and Response
+message GetUserRequest {
+  string id = 1;
+}
+
+message GetUserResponse {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  bool success = 4;
+}
+
+// Update User Request and Response
+message UpdateUserRequest {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message UpdateUserResponse {
+  string message = 1;
+  bool success = 2;
+}
+
+// Delete User Request and Response
+message DeleteUserRequest {
+  string id = 1;
+}
+
+message DeleteUserResponse {
+  string message = 1;
+  bool success = 2;
+}
+
+// Get All Users Request and Response
+message GetAllUsersRequest {}
+
+message GetAllUsersResponse {
+  repeated User users = 1; // List of users
+  bool success = 2;
+}
+
+// User message for reuse in GetAllUsersResponse
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}
